@@ -93,9 +93,7 @@ export default function SignInForm() {
                 <Input
                   type="email"
                   placeholder="info@gmail.com"
-                  value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  required
                 />
               </div>
 
@@ -108,9 +106,7 @@ export default function SignInForm() {
                   <Input
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
-                    value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    required
                   />
                   <span
                     onClick={() => setShowPassword(!showPassword)}
@@ -130,12 +126,7 @@ export default function SignInForm() {
 
               {/* Button */}
               <div className="mt-10">
-                <Button
-                  className="w-full"
-                  size="sm"
-                  type="submit"
-                  disabled={loading}
-                >
+                <Button className="w-full" size="sm" disabled={loading}>
                   {loading ? "Signing in..." : "Sign In"}
                 </Button>
               </div>
