@@ -31,9 +31,6 @@ export default function RootLayout({
 
       const token = await firebaseUser.getIdToken();
       setAccessToken(token);
-      if (!token) {
-        router.replace("/signin");
-      }
       const userData = {
         uid: firebaseUser.uid,
         email: firebaseUser.email,
@@ -44,6 +41,11 @@ export default function RootLayout({
       localStorage.setItem("user", JSON.stringify(userData));
     });
 
+    if (!accessToken) {
+      router.replace("/signin");
+    } else {
+      router.replace("/");
+    }
     return () => unsubscribe();
   }, [router, accessToken]);
 
