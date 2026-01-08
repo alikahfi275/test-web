@@ -5,15 +5,18 @@ import React, { useState } from "react";
 import { Dropdown } from "../ui/dropdown/Dropdown";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import { auth } from "@/lib/firebase";
+import { signOut } from "firebase/auth";
 
 export default function UserDropdown() {
   const [isOpen, setIsOpen] = useState(false);
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const router = useRouter();
 
-  const handleLogout = () => {
-    logout(); // ⬅️ hapus state + localStorage
-    router.replace("/signin"); // ⬅️ redirect
+  const handleLogout = async () => {
+    await signOut(auth);
+    localStorage.clear();
+    router.replace("/signin");
   };
 
   return (
